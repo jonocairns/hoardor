@@ -26,6 +26,7 @@ export class Assistant {
                 msg.channel.send(`'.i' to generate an invite link for this bot.`);
                 msg.channel.send(`'.c FROM TO' to convert based on exchange rates.`);
                 msg.channel.send(`'.r' to refresh exchange rates`);
+                msg.channel.send(`'.p 8TB' to get prices of hdds from pcpartpicker`);
             }
         });
     }
