@@ -29,10 +29,13 @@
   "homepage": "https://github.com/jonocairns/jarvis#readme",
   "dependencies": {
     "@types/node": "^8.0.51",
+    "cheerio": "^1.0.0-rc.2",
     "concurrently": "^3.5.0",
     "discord.js": "^11.2.1",
     "dotenv": "^4.0.0",
+    "money": "^0.2.0",
     "nodemon": "^1.12.1",
+    "open-exchange-rates": "^0.3.0",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
     "ts-lint": "^4.5.1",

@@ -21,7 +21,11 @@ export class Assistant {
             }
 
             if (msg.content.startsWith('.help') || msg.content.startsWith('.h')) {
-                msg.reply('\'.g thing to search for\' to search google. \'.s https://urlToShorten.com/this/is/long\' to shorten a URL. \`.i\' to generate an invite link for this bot.');
+                msg.channel.send(`'.g thing to search for' to search google.`);
+                msg.channel.send(`'.s https://urlToShorten.com/this/is/long\' to shorten a URL. `);
+                msg.channel.send(`'.i' to generate an invite link for this bot.`);
+                msg.channel.send(`'.c FROM TO' to convert based on exchange rates.`);
+                msg.channel.send(`'.r' to refresh exchange rates`);
             }
         });
     }
