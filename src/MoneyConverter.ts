@@ -48,8 +48,9 @@ export class MoneyConverter {
                     const converted = this.convert(query);
                     if (converted === -1) {
                         msg.reply('hoardorrrr!!! (type .h for help)');
+                    } else {
+                        msg.reply(`$${converted.toFixed(2)}`);
                     }
-                    msg.reply(`$${converted.toFixed(2)}`);
                 } catch (err) {
                     console.log(err);
                     msg.reply('...hoardor? :confused:');
