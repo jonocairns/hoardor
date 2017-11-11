@@ -24,13 +24,13 @@ client.on('message', async msg => {
     msg.reply('Pong!');
   }
 
-  if(msg.content.startsWith('!i')) {
+  if(msg.content.startsWith('!i') || msg.content.startsWith('!invite')) {
     const inviteLink = `invite link: https://discordapp.com/oauth2/authorize?&client_id=${process.env.BOT_CLIENT_ID}&scope=bot&permissions=${process.env.BOT_PERMISSIONS}"`
     msg.delete();
     msg.reply(inviteLink);
   }
 
-  if(msg.content.startsWith('!q')) {
+  if(msg.content.startsWith('!q') || msg.content.startsWith('!query')) {
     const query = processCommand(msg);
 
     console.log(`searching for ${query}`);
@@ -44,16 +44,21 @@ client.on('message', async msg => {
     }
   }
 
-  if(msg.content.startsWith('!s')) {
+  if(msg.content.startsWith('!s') || msg.content.startsWith('!shorten')) {
     const command = processCommand(msg);
     const query = command.split(' ');
     if(query.length !== 1) {
         msg.reply('please correct the link (and just one at a time)');
     } else {
+        console.log(`shortening the url ${command}`);
         const shortUrl = await shortenerClient.shorten(command);
         msg.delete();
         msg.reply(shortUrl.id);
     }
+  }
+
+  if(msg.content.startsWith('!help') || msg.content.startsWith('!h')) { 
+    msg.reply('!q or !query [thing to search for] to search google. !s or !shorten [https://urlToShorten.com]. !i or !invite to generate an invite link for this bot.');
   }
 });
 client.login(process.env.TOKEN).catch(a => console.log(a));
