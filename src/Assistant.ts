@@ -21,7 +21,7 @@ export class Assistant {
             }
 
             if (msg.content.startsWith('.help') || msg.content.startsWith('.h')) {
-                msg.reply('\'.g thing to search for\' to search google. \'.s https://urlToShorten.com/this/is/long]\' to shorten a URL. \`.i\' to generate an invite link for this bot.');
+                msg.reply('\'.g thing to search for\' to search google. \'.s https://urlToShorten.com/this/is/long\' to shorten a URL. \`.i\' to generate an invite link for this bot.');
             }
         });
     }
