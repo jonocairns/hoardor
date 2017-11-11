@@ -2,63 +2,18 @@ require('dotenv').config();
 import { Search } from './Search';
 import { Shortener } from './Shortener';
 import * as Discord from 'discord.js';
+import { Command } from './Command';
+import { Assistant } from './Assistant';
 
-const searchClient = new Search();
-const shortenerClient = new Shortener();
-
-const processCommand = (msg: any) => {
-    const message = msg.content;
-    const params = message.split(' ');
-    params.splice(0, 1);
-    return params.join(' ');
-}
-
+const command = new Command();
 const client = new Discord.Client();
+const shortenerClient = new Shortener(client, command);
+const searchClient = new Search(client, shortenerClient, command);
+const assistant = new Assistant(client);
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
 
-client.on('message', async msg => {
-  if (msg.content === 'ping') {
-    msg.reply('Pong!');
-  }
 
-  if(msg.content.startsWith('!i') || msg.content.startsWith('!invite')) {
-    const inviteLink = `invite link: https://discordapp.com/oauth2/authorize?&client_id=${process.env.BOT_CLIENT_ID}&scope=bot&permissions=${process.env.BOT_PERMISSIONS}"`
-    msg.delete();
-    msg.reply(inviteLink);
-  }
-
-  if(msg.content.startsWith('!q') || msg.content.startsWith('!query')) {
-    const query = processCommand(msg);
-
-    console.log(`searching for ${query}`);
-    const results = await searchClient.search(query);
-    msg.delete();
-    if(results.length > 0) {
-        const shortUrl = await shortenerClient.shorten(results[0].link);
-        msg.reply(`${results[0].title} - ${shortUrl.id}`);  
-    } else {
-        msg.reply('no search results');
-    }
-  }
-
-  if(msg.content.startsWith('!s') || msg.content.startsWith('!shorten')) {
-    const command = processCommand(msg);
-    const query = command.split(' ');
-    if(query.length !== 1) {
-        msg.reply('please correct the link (and just one at a time)');
-    } else {
-        console.log(`shortening the url ${command}`);
-        const shortUrl = await shortenerClient.shorten(command);
-        msg.delete();
-        msg.reply(shortUrl.id);
-    }
-  }
-
-  if(msg.content.startsWith('!help') || msg.content.startsWith('!h')) { 
-    msg.reply('!q or !query [thing to search for] to search google. !s or !shorten [https://urlToShorten.com]. !i or !invite to generate an invite link for this bot.');
-  }
-});
 client.login(process.env.TOKEN).catch(a => console.log(a));
