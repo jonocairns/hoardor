@@ -76,7 +76,7 @@ export class Prices {
 
                     top.forEach(async element => {
                         const shortenedLink = await this.shortenerClient.shorten(element.link);
-                        msg.channel.sendMessage(`${element.name} - ${element.capacity} - ${element.price} - ${shortenedLink.id} :money_with_wings: - (PPG: ${element.ppg})`);
+                        msg.channel.send(`${element.name} - ${element.capacity} - ${element.price} - ${shortenedLink.id} :money_with_wings: - (PPG: ${element.ppg})`);
                     });
                 } catch (err) {
                     msg.reply('...hoardor? :confused:');
