@@ -70,7 +70,7 @@ export class Prices {
             if (msg.content.startsWith('.p') || msg.content.startsWith('.price')) {
                 try {
                     const query = this.command.process(msg);
-
+                    console.log(`fetching prices for query: ${query}`)
                     const results = await this.hdd(query);
                     const top = results.slice(0, 5);
 
