@@ -36,7 +36,7 @@ export class Shortener {
                     const command = this.command.process(msg);
                     const query = command.split(' ');
                     if (query.length !== 1) {
-                        msg.reply('please correct the link (and just one at a time)');
+                        msg.reply('hoardor! (please correct the link - and just one at a time)');
                     } else {
                         console.log(`shortening the url ${command}`);
                         const shortUrl = await this.shorten(command);
@@ -45,7 +45,7 @@ export class Shortener {
                     }
                 }
             } catch(err) {
-                msg.reply('hoardor? :confused:');
+                msg.reply(':confused: hoardor? (something went wrong) :confused:');
             }
             
         });

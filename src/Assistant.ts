@@ -10,17 +10,19 @@ export class Assistant {
 
     private bind(): void {
         this.discordClient.on('message', async msg => {
-            if (msg.content === 'ping') {
+            if (msg.content === '.ping') {
                 msg.reply('Pong!');
             }
 
             if (msg.content.startsWith('.i') || msg.content.startsWith('.invite')) {
+                console.log('generating invite...');
                 const inviteLink = `invite link: https://discordapp.com/oauth2/authorize?&client_id=${process.env.BOT_CLIENT_ID}&scope=bot&permissions=${process.env.BOT_PERMISSIONS}"`
                 msg.delete();
                 msg.reply(inviteLink);
             }
 
             if (msg.content.startsWith('.help') || msg.content.startsWith('.h')) {
+                console.log('generating help documentation...');
                 msg.channel.send(`'.g thing to search for' to search google.`);
                 msg.channel.send(`'.s https://urlToShorten.com/this/is/long\' to shorten a URL. `);
                 msg.channel.send(`'.i' to generate an invite link for this bot.`);

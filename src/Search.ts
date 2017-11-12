@@ -33,11 +33,11 @@ export class Search {
                         const shortUrl = await this.shortenerClient.shorten(results[0].link);
                         msg.reply(`${results[0].title} - ${shortUrl.id}`);
                     } else {
-                        msg.reply('no search results');
+                        msg.reply(':no_entry_sign: hoardor... (no results found) :no_entry_sign: ');
                     }
                 }
             } catch(e) {
-                msg.reply('...hoardor? :confused:');
+                msg.reply(':confused: hoardor? (something went wrong) :confused:');
             }
             
         });

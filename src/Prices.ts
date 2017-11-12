@@ -78,8 +78,11 @@ export class Prices {
                         const shortenedLink = await this.shortenerClient.shorten(element.link);
                         msg.channel.send(`${element.name} - ${element.capacity} - ${element.price} - ${shortenedLink.id} :money_with_wings: - (PPG: ${element.ppg})`);
                     });
+                    if(top.length === 0) {
+                        msg.channel.send(':no_entry_sign: hoardor... (no results found) :no_entry_sign: ');
+                    }
                 } catch (err) {
-                    msg.reply('...hoardor? :confused:');
+                    msg.reply(':confused: hoardor? (something went wrong) :confused:');
                 }
 
 
